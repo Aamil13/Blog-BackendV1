@@ -85,18 +85,18 @@ export const GetPostByID= async(req,res)=>{
 
 export const UpdatedPost = async(req,res)=>{
     const id = req.params.id;
-    const {title,description,image,location,date}= req.body;
+    const {title,description,image,location}= req.body;
 
     if(!title || title.trim() === '' ||!description || description.trim() === '' 
-    || !image || image.trim() === '' || !location || location.trim() === '' ||
-    !date){
+    || !image || image.trim() === '' || !location || location.trim() === '')
+    {
        return res.status(422).json({message:"All Fields Required"})
     }
 
     let post;
     try {
         post = await Post.findByIdAndUpdate(id,{
-            title,description,image,date: new Date(`${date}`),location
+            title,description,image,location
         })
     } catch (error) {
        return console.log(error);
