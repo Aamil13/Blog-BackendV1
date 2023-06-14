@@ -4,9 +4,12 @@ import User from "../Modal/User.js";
 
 export const GetAllPost = async(req,res)=>{
         let posts;
+        const page = Number(req.query.page) || 1
+        const limit = 10;
+        const startIndex = (page - 1)*limit;
 
         try {
-            posts = await Post.find()
+            posts = await Post.find().skip(startIndex).limit(limit)
         } catch (error) {
            return console.log(error);
         }

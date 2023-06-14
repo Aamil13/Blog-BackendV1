@@ -41,7 +41,7 @@ export const SignUp = async(req,res)=>{
     if(!users){
        return res.status(500).json({message:"Internal Server Error"})
     }
-
+   
     return res.status(201).json({users})
 }
 
