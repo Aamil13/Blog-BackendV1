@@ -7,10 +7,10 @@ export const GetAllPost = async(req,res)=>{
         const page = Number(req.query.page) || 1
         const limit = 10;
         const startIndex = (page - 1)*limit;
-        let count;
+        let count = await Post.countDocuments();
         try {
             posts = await Post.find().skip(startIndex).limit(limit)
-            count = await posts.length
+            // count = await Post.length
         } catch (error) {
            return console.log(error);
         }
