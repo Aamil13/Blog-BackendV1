@@ -10,7 +10,7 @@ export const GetAllPost = async(req,res)=>{
         let count;
         try {
             posts = await Post.find().skip(startIndex).limit(limit)
-            count = await posts.length()
+            count = await posts.length
         } catch (error) {
            return console.log(error);
         }
