@@ -10,6 +10,7 @@ export const GetAllPost = async(req,res)=>{
 
         try {
             posts = await Post.find().skip(startIndex).limit(limit)
+            let count = posts.length()
         } catch (error) {
            return console.log(error);
         }
@@ -18,7 +19,7 @@ export const GetAllPost = async(req,res)=>{
           return  res.status(500).json({message:"Unexpected Error Occured"})
         }
 
-        return res.status(200).json({posts})
+        return res.status(200).json({posts,count})
 }
 
 export const createPost = async(req,res)=>{
