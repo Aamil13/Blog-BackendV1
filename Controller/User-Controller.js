@@ -76,3 +76,21 @@ export const Login=async(req,res)=>{
 
 
 }
+
+export const getUserbyId = async(req,res)=>{
+
+    const id = req.params.id
+    let user;
+    try {
+        user = await User.findById(id).populate("post")
+    } catch (error) {
+        return console.log(error);
+    }
+
+    if(!user){
+        return res.status(404).json({message:"NO USER FOUND!"})
+    }
+
+    return res.status(200).json({user})
+
+}
