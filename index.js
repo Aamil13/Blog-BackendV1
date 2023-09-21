@@ -7,12 +7,14 @@ import {connectdb} from './Utils/ConnectDB.js'
 import PostRouter from "./Routes/Post-Routes.js";
 import Cors from "cors"
 
+
 const app = express()
+app.use(Cors())
 dotenv.config()
 
 
 app.use(express.json())
-app.use(Cors())
+
 // Routes
 app.use("/user",userRouter)
 app.use("/posts",PostRouter)

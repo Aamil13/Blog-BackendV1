@@ -76,7 +76,7 @@ export const GetPostByID= async(req,res)=>{
 
     let post;
     try {
-        post = await Post.findById( id)
+        post = await Post.findById(id)
     } catch (error) {
         return console.log(error);
     }
@@ -136,4 +136,29 @@ export const DeletePost = async(req,res)=>{
 
         return res.status(200).json({message:"Successfully Deleted"})
 
+}
+
+export const CommentPost = async(req,res)=>{
+    const id = req.params.id;
+    const {comment,userId}= req.body;
+
+    if(!comment || comment.trim() === ""){
+        return res.status(422).json({message:"Empty Comment"})
+    }
+
+    let comm ;
+    
+    try {
+        comm = await Post.findById(id)
+        comm.comment.push({userId,comment})
+        await comm.save()
+    } catch (error) {
+        return console.log(error);
+    }
+
+    if(!comm){
+        return  res.status(500).json({message:"Unable to comment"})
+      }
+
+      return res.status(200).json({message:"Comment Added"})
 }
