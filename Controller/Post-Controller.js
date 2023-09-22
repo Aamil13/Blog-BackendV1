@@ -141,7 +141,7 @@ export const DeletePost = async(req,res)=>{
 
 export const CommentPost = async(req,res)=>{
     const id = req.params.id;
-    const {comment,userId}= req.body;
+    const {comment,userId,name,date}= req.body;
 
     if(!comment || comment.trim() === ""){
         return res.status(422).json({message:"Empty Comment"})
@@ -151,7 +151,8 @@ export const CommentPost = async(req,res)=>{
     
     try {
         comm = await Post.findById(id)
-        comm.comment.push({userId,comment})
+       
+        comm.comment.push({name,userId,comment,date})
         await comm.save()
     } catch (error) {
         return console.log(error);

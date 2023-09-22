@@ -57,6 +57,7 @@ export const Login=async(req,res)=>{
     let existingUser
     try {
        existingUser = await User.findOne({email})
+    
     } catch (error) {
         return console.log(error)
     }
@@ -71,7 +72,7 @@ export const Login=async(req,res)=>{
       return  res.status(400).json({message:'Incorrect Password'})
     }
 
-    return res.status(200).json({id: existingUser._id , message:"Login Successful"})
+    return res.status(200).json({id: existingUser._id,name:existingUser.name , message:"Login Successful"})
 
 
 
