@@ -76,7 +76,8 @@ export const GetPostByID= async(req,res)=>{
 
     let post;
     try {
-        post = await Post.findById(id)
+        post = await Post.findById(id).populate("user")
+        post.user.password = undefined
     } catch (error) {
         return console.log(error);
     }
