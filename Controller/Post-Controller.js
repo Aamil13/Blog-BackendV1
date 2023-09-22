@@ -9,7 +9,7 @@ export const GetAllPost = async(req,res)=>{
         const startIndex = (page - 1)*limit;
         let count = await Post.countDocuments();
         try {
-            posts = await Post.find().populate("user").skip(startIndex).limit(limit)
+            posts = await Post.find().sort("-date").populate("user").skip(startIndex).limit(limit)
             // count = await Post.length
         } catch (error) {
            return console.log(error);
